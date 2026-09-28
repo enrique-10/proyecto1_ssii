@@ -47,9 +47,9 @@ CREATE TABLE IF NOT EXISTS transactions (
 
 
 def get_connection():
-    conn = sqlite3.connect(DB_PATH)
+    conn = sqlite3.connect(DB_PATH)     # abre el archivo secbank.db
     conn.row_factory = sqlite3.Row          # filas accesibles por nombre: fila["username"]
-    conn.execute("PRAGMA foreign_keys = ON")
+    conn.execute("PRAGMA foreign_keys = ON")    # activa las claves foráneas que vienen desactivdas por defecto. Hay que hacerlo en cada conexión
     return conn
 
 
@@ -64,7 +64,7 @@ if __name__ == "__main__":
     init_db()
     conn = get_connection()
     tablas = conn.execute(
-        "SELECT name FROM sqlite_master WHERE type='table'"
-    ).fetchall()
+        "SELECT name FROM sqlite_master WHERE type='table'"  # sqlite_master es una tabla interna de SQLite que lista todo lo que hay en la BD
+    ).fetchall()    # esta consulta pide los nombres de las tablas
     print("Tablas creadas:", [t["name"] for t in tablas])
     conn.close()
