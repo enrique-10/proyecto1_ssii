@@ -167,7 +167,6 @@ def seed_users():
 if __name__ == "__main__":
     init_db()   # podemos correrlo siempre que queramos gracias a los IF NOT EXISTS
     seed_users()
-
     s = login("alice", "AlicePass123!")
     print("Login alice OK, token:", s["token"][:12], "...")
 
