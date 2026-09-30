@@ -14,7 +14,7 @@ from pydantic import BaseModel, Field, ValidationError
 
 from server import auth
 from server.db import get_connection, init_db
-from server.security import SecurityError, verify_request
+from server.security import (SecurityError, verify_request, HEADER_SIGNATURE, HEADER_NONCE, HEADER_TIMESTAMP)
 
 # ---------- Logs: consola + evidencias/server.log ----------
 
@@ -69,6 +69,24 @@ class TransferRequest(BaseModel):
 
 
 # ---------- Manejo de errores: nunca se cae, siempre responde JSON ----------
+"""
+El "AuthError lo hemos inventado nosotros, por lo que cuadno por lo que sea, FastAPI recibe un error de ese tipo,
+como pueded ser en los casos de "auth.py" en los quehacemos raise de esos errores, como FastAPI no lo reconoce, responde con
+un 500 Error Interno, y el cliente nunca se entera de que su contaseña está mal
+
+Tenemos que decirle que función usar para contruir la respuesta
+
+
+Podríamos hacerlo añadiendo a mano un manejador de erroes:
+
+            async def auth_error_handler(request, exc):
+                return JSONResponse(status_code=exc.status_code, content={"detail": exc.message})
+
+            app.add_exception_handler(auth.AuthError, auth_error_handler)
+
+
+Pero si lo hacemos con decoradores queda como aparece en el código.
+"""
 
 @app.exception_handler(auth.AuthError)
 async def auth_error_handler(request: Request, exc: auth.AuthError):
@@ -113,9 +131,9 @@ async def verify_signed_request(request: Request, session) -> tuple[bytes, dict]
     """Verifica HMAC, timestamp y nonce. Devuelve el body y las cabeceras de seguridad."""
     body = await request.body()
     sec = {
-        "signature": request.headers.get("X-Signature"),
-        "nonce": request.headers.get("X-Nonce"),
-        "timestamp": request.headers.get("X-Timestamp"),
+        "signature": request.headers.get(HEADER_SIGNATURE),
+        "nonce": request.headers.get(HEADER_NONCE),
+        "timestamp": request.headers.get(HEADER_TIMESTAMP),
     }
     try:
         verify_request(session["session_key"], request.method, request.url.path,

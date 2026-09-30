@@ -10,6 +10,11 @@ TIMESTAMP_WINDOW = 60                           # segundos de tolerancia (RS3)
 NONCE_RE = re.compile(r"[0-9a-f]{32}")          # 16 bytes en hex (128 bits)
 SIGNATURE_RE = re.compile(r"[0-9a-f]{64}")      # HMAC-SHA256 en hex (256 bits)
 
+# Nombres de las cabeceras de seguridad (acuerdo cliente <-> servidor)
+HEADER_SIGNATURE = "X-Signature"
+HEADER_NONCE = "X-Nonce"
+HEADER_TIMESTAMP = "X-Timestamp"
+
 
 class SecurityError(Exception):
     def __init__(self, message, status_code=401):
