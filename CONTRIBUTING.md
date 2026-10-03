@@ -24,6 +24,9 @@
 - Nada de `git push --force`.
 - Anotad cómo usáis la IA (para el apartado de la memoria).
 
+## Comandos ejecución
+- python -m unittest -v tests/test_security.py (ver detalladamente la ejecución de los test de seguridad)
+
 ## Reparto
 | Quién | Rama | Carpetas |
 |---|---|---|
