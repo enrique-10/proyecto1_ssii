@@ -1,0 +1,68 @@
+=== SecBank (sin sesión) ===
+1. Registrarse
+2. Iniciar sesión
+3. Transferencia
+4. Cerrar sesión
+0. Salir
+> 1
+  Usuario: Eduardo
+  Contraseña: 
+  ✔ [201] Usuario registrado correctamente
+
+
+=== SecBank (sin sesión) ===
+1. Registrarse
+2. Iniciar sesión
+3. Transferencia
+4. Cerrar sesión
+0. Salir
+> 2
+  Usuario: Eduardo
+  Contraseña: 
+  ✔ [200] Sesión iniciada como Eduardo
+
+
+=== SecBank (sesión: Eduardo) ===
+1. Registrarse
+2. Iniciar sesión
+3. Transferencia
+4. Cerrar sesión
+0. Salir
+> 3
+  Cuenta origen (IBAN): ES1143435454686890903838     
+  Cuenta destino (IBAN): ES0044445555666677778888     
+  Importe (EUR): 200.0
+  ✔ [201] Transferencia realizada
+
+
+  === SecBank (sesión: Eduardo) ===
+1. Registrarse
+2. Iniciar sesión
+3. Transferencia
+4. Cerrar sesión
+0. Salir
+> 3
+  Cuenta origen (IBAN): ES00 4444 5555 6666 7777 8888
+  Cuenta destino (IBAN): ES11 4343 5454 6868 9090 3838
+  Importe (EUR): 150.50
+  ✘ [400] Datos de transferencia inválidos
+
+
+=== SecBank (sesión: Eduardo) ===
+1. Registrarse
+2. Iniciar sesión
+3. Transferencia
+4. Cerrar sesión
+0. Salir
+> 4
+  ✔ [200] Sesión cerrada
+
+
+=== SecBank (sin sesión) ===
+1. Registrarse
+2. Iniciar sesión
+3. Transferencia
+4. Cerrar sesión
+0. Salir
+> 0
+
